@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Reset default styles for links */
+a {
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+/* Sticky Header */
+header {
+    position: sticky;
+    top: 0;
+    background-color: #f8fbff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 5%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: auto;
+    color: #154a68;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.logo img {
+    width: 60px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.logo > :last-child {
+    margin-left: 10px;
+    color: #30363c;
+}
+
+/* Vertical Divider */
+.vertical {
+    border-left: 2px solid #ff6b6b;
+    height: 30px;
+    position: absolute;
+    left: 17%;
+}
+
+/* Navigation Menu */
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+/* Navigation Links */
+.nav a {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+    font-weight: 500;
+    color: #4f585e;
+    position: relative;
+}
+
+/* Hover Underline Effect */
+.nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #ff6b6b;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.nav a:hover {
+    color: #ff3b3b;
+}
+
+/* Icons */
+.nav a i {
+    margin-right: 10px;
+    font-size: 18px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav a:hover i {
+    transform: scale(1.2);
+    color: #ff3b3b;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

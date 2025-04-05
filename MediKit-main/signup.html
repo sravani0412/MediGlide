@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/1bffa3735e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./CSS/signup.css">
+</head>
+<body>
+    <div class="login">
+        <div class="login_box">
+            <div class="left">
+                <div class="top">
+                    <a href="./landing.html"><i class="fa-solid fa-angle-left"></i> Return home</a>
+                </div>
+                <div class="contact">
+                    <form id="signupForm">
+                        <h3>SIGN UP</h3>
+                        <input id="username" type="text" placeholder="USERNAME" required>
+                        <input id="email" type="email" placeholder="EMAIL" required>
+                        <input id="password" type="password" placeholder="PASSWORD" required>
+                        <p>Already have an account? <a href="./login.html">Login</a></p>
+                        <button type="submit"> LET'S GO</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <img src="./data/6333040.jpg" alt="Signup Image">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let arrData = JSON.parse(localStorage.getItem('user')) || [];
+        
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let username = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            let existingEmails = arrData.map(user => user.email);
+
+            if (existingEmails.includes(email)) {
+                alert('You are an existing user');
+            } else {
+                let newUser = { username, email, password };
+                arrData.push(newUser);
+                localStorage.setItem('user', JSON.stringify(arrData));
+                alert('Sign-up successful!');
+                window.location = './login.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css">
+    <script src="https://kit.fontawesome.com/1bffa3735e.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #B6D0E2, #D9E8F5); /* Soft pastel blue gradient */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .login_box {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            width: 75%;
+            max-width: 1000px;
+            animation: slideIn 1s ease-out;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .login_box .left {
+            padding: 50px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #FFB3BA, #FFDFD3); /* Light pastel pink gradient */
+        }
+
+        .login_box .left h3 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-out;
+        }
+
+        .login_box .left input {
+            width: 100%;
+            padding: 14px;
+            margin: 16px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            background-color: #f4f4f4;
+        }
+
+        .login_box .left input:focus {
+            border-color: #FFB3BA;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 179, 186, 0.7);
+        }
+
+        .login_box .left button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #FFB3BA, #FF9F80); /* Pastel pink to coral gradient button */
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .login_box .left button:hover {
+            background: linear-gradient(135deg, #FF9F80, #FFB3BA);
+            transform: scale(1.05);
+        }
+
+        .login_box .left button:active {
+            transform: scale(0.98);
+        }
+
+        .top_link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .top_link a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .top_link a:hover {
+            text-decoration: underline;
+        }
+
+        .top_link i {
+            margin-right: 10px;
+        }
+
+        /* Right section background image */
+        .login_box .right {
+            flex: 1;
+            background-image: url("./data/2853458.jpg");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            opacity: 0.6;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Animation for sliding in */
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Fade-in animation for text */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Making sure the login box is responsive */
+        @media (max-width: 768px) {
+            .login_box {
+                flex-direction: column;
+                width: 100%;
+                max-width: none;
+            }
+
+            .login_box .left {
+                padding: 30px;
+            }
+
+            .login_box .left h3 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="login">
+        <div class="login_box">
+            <div class="left">
+                <div class="top_link"><a href="./Index.html" style="pointer-events: all;"> <i class="fa-solid fa-angle-left"></i> Return home</a></div>
+                <div class="contact">
+                    <form action="">
+                        <h3>LogIn</h3>
+                        <input id="email" type="text" placeholder="EMAIL ID" required>
+                        <input id="password" type="password" placeholder="PASSWORD" required>
+                        <button class="submit" type="submit">LogIn</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right"></div>
+        </div>
+    </section>
+
+    <script>
+        let users = JSON.parse(localStorage.getItem('user'));
+        document.querySelector('form').addEventListener('submit', login);
+
+        function login(event) {
+            event.preventDefault();
+            let userid = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            let userpass = [];
+            let userEmail = [];
+            for (let i = 0; i < users.length; i++) {
+                userpass.push(users[i].password);
+                userEmail.push(users[i].email);
+            }
+
+            if (userEmail.includes(userid)) {
+                let userIndex = userEmail.indexOf(userid);
+                if (userpass[userIndex] === password) {
+                    window.location = './home.html';
+                } else {
+                    alert('Wrong Password!');
+                }
+            } else {
+                alert('You are not an existing user. Try to Sign Up.');
+            }
+        }
+    </script>
+</body>
+
+</html>
